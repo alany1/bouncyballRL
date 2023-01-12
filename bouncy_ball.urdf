@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<robot name="ball">
+  <link name="ball">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.5"/>
+      </geometry>
+    <material name='ball_mat'>
+        <color rgba="0.8 0.8 0 .5"/>
+    </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+
+  <link name="pole1">
+    <visual>
+      <geometry>
+        <box size="0.05 .5 0.05"/>	
+      </geometry>
+      <origin xyz="0 -0.4 0"/>
+      <material name="pole_mat">
+        <color rgba="0.1 0.1 0.3 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.5 0.05"/>	
+      </geometry>
+      <origin xyz="0 -0.4 0"/>
+    </collision>
+    <inertial>
+      <mass value="0"/>
+      <origin xyz="0 -0.4 0"/>
+    </inertial>
+  </link>
+
+  <link name="pole2">
+    <visual>
+      <geometry>
+        <box size="0.05 .5 0.05"/>	
+      </geometry>
+      <origin xyz="0 0.4 0"/>
+      <material name="pole_mat">
+        <color rgba="0.3 0.1 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.5 0.05"/>	
+      </geometry>
+      <origin xyz="0 0.4 0"/>
+    </collision>
+    <inertial>
+      <mass value="0"/>
+      <origin xyz="0 0.4 0"/>
+    </inertial>
+  </link>
+
+  <joint name="ball_to_pole1" type="continuous">
+    <axis xyz="0 1 0"/>
+    <origin xyz="0 0 0"/>
+    <parent link="ball"/>
+    <child link="pole1"/>
+    <limit lower="-.75" upper=".75" effort="1.0" velocity="1.5708"/>
+  </joint>
+  
+  <joint name="ball_to_pole2" type="continuous">
+    <axis xyz="0 1 0"/>
+    <origin xyz="0 0 0"/>
+    <parent link="ball"/>
+    <child link="pole2"/>
+    <limit lower="-.75" upper=".75" effort="1.0" velocity="1.5708"/>
+  </joint>
+
+
+</robot>
